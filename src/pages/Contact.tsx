@@ -54,6 +54,7 @@ ${formData.message}
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
+            <span className="text-xl font-semibold text-foreground">Agape Safety Nest LLC</span>
           </Link>
           <Link to="/">
             <Button variant="ghost" size="sm">
@@ -121,11 +122,11 @@ ${formData.message}
                 <p className="text-sm text-muted-foreground mb-4">
                   If you're in crisis or need urgent assistance, please call our hotline or visit your local emergency services.
                 </p>
-                <Button className="w-full" asChild>
-                  <Link to="/onboarding">
+                <Link to="/onboarding" className="w-full">
+                  <Button className="w-full">
                     Start Onboarding Process
-                  </Link>
-                </Button>
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

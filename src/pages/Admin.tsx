@@ -4,10 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Users, FileText, Settings, AlertCircle, Phone, Mail, Calendar, Baby } from "lucide-react";
+import { ArrowLeft, Users, FileText, Settings, AlertCircle, Phone, Mail, Calendar, Baby, Plus, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import logo from "@/assets/logo.png";
 
 const Admin = () => {
@@ -17,6 +19,16 @@ const Admin = () => {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [isAddResidentOpen, setIsAddResidentOpen] = useState(false);
+  const [newResident, setNewResident] = useState({
+    name: "",
+    children: "",
+    ages: "",
+    moveInDate: "",
+    expectedExit: "",
+    caseManager: "Robin Mitchell"
+  });
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,9 +102,10 @@ const Admin = () => {
         {/* Header */}
         <nav className="border-b border-border bg-white shadow-sm">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-3">
-              <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
-            </Link>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
+            <span className="text-xl font-semibold text-foreground">Agape Safety Nest LLC</span>
+          </Link>
             <Link to="/">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -163,6 +176,7 @@ const Admin = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-3">
             <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
+            <span className="text-xl font-semibold text-foreground">Agape Safety Nest LLC</span>
           </Link>
           <div className="flex items-center gap-4">
             <Link to="/">
@@ -241,7 +255,27 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="requests" className="space-y-4">
-            {mockRequests.map((request) => (
+            <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4 text-muted-foreground" />
+                <Label>Filter by Status:</Label>
+              </div>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder="All Requests" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Requests</SelectItem>
+                  <SelectItem value="Pending Review">Pending Review</SelectItem>
+                  <SelectItem value="Under Review">Under Review</SelectItem>
+                  <SelectItem value="Approved">Approved</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {mockRequests
+              .filter(request => statusFilter === "all" || request.status === statusFilter)
+              .map((request) => (
               <Card key={request.id}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -294,6 +328,111 @@ const Admin = () => {
           </TabsContent>
 
           <TabsContent value="residents" className="space-y-4">
+            <div className="flex justify-end mb-6">
+              <Dialog open={isAddResidentOpen} onOpenChange={setIsAddResidentOpen}>
+                <DialogTrigger asChild>
+                  <Button>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add New Resident
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl">
+                  <DialogHeader>
+                    <DialogTitle>Add New Resident</DialogTitle>
+                    <DialogDescription>
+                      Enter the details of the new resident to add them to the system.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 pt-4">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="resident-name">Full Name *</Label>
+                        <Input
+                          id="resident-name"
+                          value={newResident.name}
+                          onChange={(e) => setNewResident({...newResident, name: e.target.value})}
+                          placeholder="Enter full name"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="resident-children">Number of Children *</Label>
+                        <Input
+                          id="resident-children"
+                          type="number"
+                          value={newResident.children}
+                          onChange={(e) => setNewResident({...newResident, children: e.target.value})}
+                          placeholder="0"
+                        />
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="resident-ages">Children Ages</Label>
+                        <Input
+                          id="resident-ages"
+                          value={newResident.ages}
+                          onChange={(e) => setNewResident({...newResident, ages: e.target.value})}
+                          placeholder="e.g., 5, 3, 1"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="resident-movein">Move-in Date *</Label>
+                        <Input
+                          id="resident-movein"
+                          type="date"
+                          value={newResident.moveInDate}
+                          onChange={(e) => setNewResident({...newResident, moveInDate: e.target.value})}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="resident-exit">Expected Exit Date</Label>
+                        <Input
+                          id="resident-exit"
+                          type="date"
+                          value={newResident.expectedExit}
+                          onChange={(e) => setNewResident({...newResident, expectedExit: e.target.value})}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="resident-manager">Case Manager</Label>
+                        <Input
+                          id="resident-manager"
+                          value={newResident.caseManager}
+                          onChange={(e) => setNewResident({...newResident, caseManager: e.target.value})}
+                          placeholder="Case manager name"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex gap-2 pt-4">
+                      <Button 
+                        onClick={() => {
+                          // In production, this would save to backend
+                          console.log("Adding resident:", newResident);
+                          setIsAddResidentOpen(false);
+                          setNewResident({
+                            name: "",
+                            children: "",
+                            ages: "",
+                            moveInDate: "",
+                            expectedExit: "",
+                            caseManager: "Robin Mitchell"
+                          });
+                        }}
+                        disabled={!newResident.name || !newResident.children || !newResident.moveInDate}
+                      >
+                        Add Resident
+                      </Button>
+                      <Button variant="outline" onClick={() => setIsAddResidentOpen(false)}>
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+
             {mockResidents.map((resident) => (
               <Card key={resident.id}>
                 <CardHeader>

@@ -12,6 +12,7 @@ const Landing = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
+            <span className="text-xl font-semibold text-foreground">Agape Safety Nest LLC</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
@@ -32,10 +33,10 @@ const Landing = () => {
             <span className="text-sm font-medium">Faith-Based Transitional Housing</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            A Safe Haven for <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Mothers & Children</span>
+            A Safe Haven for <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Women in Need</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Providing compassionate, Christ-centered support for pregnant women and mothers with children in their journey toward independence and stability.
+            Providing safe, supportive housing for expectant mothers, women who have lost children, women re-entering society after incarceration, and women experiencing homelessness - empowering them to rebuild their lives with dignity and support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/onboarding">
@@ -58,7 +59,7 @@ const Landing = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Our Mission</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Agape Safety Nest provides a safe, supportive environment where women and children can heal, grow, and build a foundation for lasting independence through faith, compassion, and practical support.
+              Agape Safety Nest LLC exists to provide a safe, nurturing, and stable home environment for expectant mothers and women with guaranteed income. Our mission is to offer compassionate support, dignified housing, and essential life resources that empower women to rebuild their lives, restore self-worth, and achieve long-term stability.
             </p>
           </div>
           
@@ -102,8 +103,88 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Founder Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Our Founder</h2>
+          </div>
+          <Card className="border-2 border-primary/20">
+            <CardContent className="pt-8">
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="rounded-full bg-primary/10 w-32 h-32 flex items-center justify-center flex-shrink-0">
+                  <Users className="h-16 w-16 text-primary" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">Robin Belinda Mitchell</h3>
+                  <p className="text-primary font-semibold mb-4">Founder & Director</p>
+                  <p className="text-muted-foreground mb-4">
+                    Agape Safety Nest LLC was founded by Robin Belinda Mitchell, a compassionate leader with a vision to create a safe and supportive housing environment for vulnerable women. Ms. Mitchell brings deep empathy and a strong sense of mission to helping women in need, particularly expectant mothers and those who have experienced the trauma of losing a child, rebuild their lives through stability, care, and respect.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2 text-sm text-muted-foreground justify-center md:justify-start">
+                    <span>📞 (910) 527-3673</span>
+                    <span className="hidden sm:inline">•</span>
+                    <span>📍 San Antonio, TX 78223</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Who We Serve Section */}
+      <section className="py-20 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Who We Serve</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Agape Safety Nest welcomes women ages 18 and older who have a guaranteed income source and are seeking stable housing and supportive care.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="border-2 hover:border-primary transition-colors">
+              <CardContent className="pt-6">
+                <Baby className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Expectant Mothers</h3>
+                <p className="text-muted-foreground">
+                  Pregnant women seeking a stable and supportive environment during pregnancy and early motherhood, with access to prenatal and postnatal care resources.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-2 hover:border-primary transition-colors">
+              <CardContent className="pt-6">
+                <Heart className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Women Who Have Lost Children</h3>
+                <p className="text-muted-foreground">
+                  Women who have lost custody of their children or experienced child loss, providing emotional support and a path toward healing and stability.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-2 hover:border-primary transition-colors">
+              <CardContent className="pt-6">
+                <Shield className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Women Re-entering Society</h3>
+                <p className="text-muted-foreground">
+                  Women transitioning after incarceration who need safe housing and support to reintegrate successfully into their communities.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-2 hover:border-primary transition-colors">
+              <CardContent className="pt-6">
+                <Home className="h-10 w-10 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Women Experiencing Homelessness</h3>
+                <p className="text-muted-foreground">
+                  Women facing housing instability or homelessness who have guaranteed income (SSI, SSDI, VA benefits, or pensions) and are motivated to rebuild their lives.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
-      <section id="services" className="py-20 px-4">
+      <section id="services" className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">What We Offer</h2>
@@ -115,17 +196,17 @@ const Landing = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="p-6 rounded-lg bg-card border border-border hover:border-primary transition-colors">
               <Home className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Safe Housing</h3>
+              <h3 className="text-xl font-semibold mb-2">Private & Semi-Private Rooms</h3>
               <p className="text-muted-foreground">
-                Clean, secure residential accommodations with private bedrooms and shared common areas.
+                Comfortable, furnished living spaces with utilities included (electricity, water, internet, climate control).
               </p>
             </div>
 
             <div className="p-6 rounded-lg bg-card border border-border hover:border-primary transition-colors">
               <Baby className="h-10 w-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Childcare Support</h3>
+              <h3 className="text-xl font-semibold mb-2">Nutritious Meals & Services</h3>
               <p className="text-muted-foreground">
-                Resources and guidance for maternal and child health, parenting education, and child development.
+                Three daily meals, laundry services, and all essential amenities for comfortable living.
               </p>
             </div>
 

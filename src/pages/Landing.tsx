@@ -12,7 +12,7 @@ const Landing = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
-            <span className="text-xl font-semibold text-foreground">Agape Safety Nest LLC</span>
+            <span className="text-xl font-semibold text-primary">Agape Safety Nest LLC</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>

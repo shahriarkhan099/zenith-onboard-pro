@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Home, Users, Baby, HandHeart, Shield } from "lucide-react";
+import { Home, Users, Baby, HandHeart, Shield, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Landing = () => {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+      <nav className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Heart className="h-8 w-8 text-primary fill-primary" />
-            <span className="text-2xl font-bold text-foreground">Agape Safety Nest</span>
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
           </div>
           <div className="hidden md:flex items-center gap-6">
             <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
@@ -25,7 +25,7 @@ const Landing = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 px-4" style={{ background: "var(--gradient-hero)" }}>
+      <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center max-w-4xl">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Shield className="h-4 w-4" />
@@ -187,13 +187,12 @@ const Landing = () => {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="py-12 px-4 bg-muted/30 border-t border-border">
+      <footer id="contact" className="py-12 px-4 bg-white border-t border-border">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Heart className="h-6 w-6 text-primary fill-primary" />
-                <span className="text-lg font-bold">Agape Safety Nest</span>
+              <div className="flex items-center gap-3 mb-4">
+                <img src={logo} alt="Agape Safety Nest" className="h-10 w-auto" />
               </div>
               <p className="text-sm text-muted-foreground">
                 Providing safe, compassionate housing and support for mothers and children.

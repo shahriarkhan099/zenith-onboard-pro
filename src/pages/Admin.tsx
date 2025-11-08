@@ -4,9 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart, ArrowLeft, Users, FileText, Settings, AlertCircle } from "lucide-react";
+import { ArrowLeft, Users, FileText, Settings, AlertCircle, Phone, Mail, Calendar, Baby } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import logo from "@/assets/logo.png";
 
 const Admin = () => {
   const [loginData, setLoginData] = useState({
@@ -24,15 +26,72 @@ const Admin = () => {
     }
   };
 
+  // Mock data for dashboard
+  const mockRequests = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      email: "sarah.j@email.com",
+      phone: "(555) 123-4567",
+      children: 2,
+      pregnancy: "28 weeks",
+      status: "Pending Review",
+      date: "2024-11-05",
+      situation: "Currently staying with friend, lease ending soon"
+    },
+    {
+      id: 2,
+      name: "Maria Rodriguez",
+      email: "maria.r@email.com",
+      phone: "(555) 234-5678",
+      children: 1,
+      pregnancy: "Not pregnant",
+      status: "Under Review",
+      date: "2024-11-03",
+      situation: "Recently left domestic violence situation"
+    },
+    {
+      id: 3,
+      name: "Jennifer Williams",
+      email: "j.williams@email.com",
+      phone: "(555) 345-6789",
+      children: 0,
+      pregnancy: "16 weeks",
+      status: "Approved",
+      date: "2024-11-01",
+      situation: "Homeless, currently in shelter"
+    }
+  ];
+
+  const mockResidents = [
+    {
+      id: 1,
+      name: "Lisa Anderson",
+      children: 3,
+      ages: "5, 3, 1",
+      moveInDate: "2024-09-15",
+      expectedExit: "2025-03-15",
+      caseManager: "Robin Mitchell"
+    },
+    {
+      id: 2,
+      name: "Amanda Brown",
+      children: 1,
+      ages: "6 months",
+      moveInDate: "2024-10-01",
+      expectedExit: "2025-04-01",
+      caseManager: "Robin Mitchell"
+    }
+  ];
+
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-white">
         {/* Header */}
-        <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <nav className="border-b border-border bg-white shadow-sm">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <Heart className="h-8 w-8 text-primary fill-primary" />
-              <span className="text-2xl font-bold text-foreground">Agape Safety Nest</span>
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
             </Link>
             <Link to="/">
               <Button variant="ghost" size="sm">
@@ -98,13 +157,12 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="border-b border-border bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <Heart className="h-8 w-8 text-primary fill-primary" />
-            <span className="text-2xl font-bold text-foreground">Agape Safety Nest Admin</span>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
           </Link>
           <div className="flex items-center gap-4">
             <Link to="/">
@@ -127,41 +185,40 @@ const Admin = () => {
           <p className="text-muted-foreground">Manage onboarding requests and resident information</p>
         </div>
 
-        <Alert className="mb-6">
+        <Alert className="mb-6 bg-muted/50 border-primary/20">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            <strong>Backend Integration Required:</strong> This dashboard requires a database backend to store and manage onboarding requests. 
-            Forms currently use email for submissions. Consider enabling a backend service to unlock full dashboard functionality.
+            <strong>Demo Mode:</strong> Showing static data. Enable backend integration to manage live data.
           </AlertDescription>
         </Alert>
 
         {/* Stats Overview */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="border-l-4 border-l-primary">
             <CardHeader className="pb-3">
               <CardDescription>Total Requests</CardDescription>
-              <CardTitle className="text-3xl">--</CardTitle>
+              <CardTitle className="text-3xl">{mockRequests.length}</CardTitle>
             </CardHeader>
           </Card>
           
-          <Card>
+          <Card className="border-l-4 border-l-amber-500">
             <CardHeader className="pb-3">
               <CardDescription>Pending Review</CardDescription>
-              <CardTitle className="text-3xl">--</CardTitle>
+              <CardTitle className="text-3xl">{mockRequests.filter(r => r.status === "Pending Review").length}</CardTitle>
             </CardHeader>
           </Card>
           
-          <Card>
+          <Card className="border-l-4 border-l-green-500">
             <CardHeader className="pb-3">
               <CardDescription>Active Residents</CardDescription>
-              <CardTitle className="text-3xl">--</CardTitle>
+              <CardTitle className="text-3xl">{mockResidents.length}</CardTitle>
             </CardHeader>
           </Card>
           
-          <Card>
+          <Card className="border-l-4 border-l-blue-500">
             <CardHeader className="pb-3">
               <CardDescription>Capacity</CardDescription>
-              <CardTitle className="text-3xl">0/12</CardTitle>
+              <CardTitle className="text-3xl">{mockResidents.length}/12</CardTitle>
             </CardHeader>
           </Card>
         </div>
@@ -184,42 +241,95 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="requests" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Onboarding Requests</CardTitle>
-                <CardDescription>Review and manage incoming applications</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">No Requests Yet</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Onboarding requests will appear here once a backend database is connected.
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Currently, requests are sent via email to info@agapesafetynest.org
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            {mockRequests.map((request) => (
+              <Card key={request.id}>
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1">
+                      <CardTitle className="text-xl">{request.name}</CardTitle>
+                      <CardDescription className="flex items-center gap-4 flex-wrap">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {request.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Baby className="h-3 w-3" />
+                          {request.children} {request.children === 1 ? 'child' : 'children'}
+                        </span>
+                      </CardDescription>
+                    </div>
+                    <Badge variant={request.status === "Approved" ? "default" : request.status === "Pending Review" ? "secondary" : "outline"}>
+                      {request.status}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Mail className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">{request.email}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Phone className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">{request.phone}</span>
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">Pregnancy Status:</p>
+                      <p className="text-sm text-muted-foreground">{request.pregnancy}</p>
+                    </div>
+                  </div>
+                  <div className="pt-2">
+                    <p className="text-sm font-medium mb-1">Current Situation:</p>
+                    <p className="text-sm text-muted-foreground">{request.situation}</p>
+                  </div>
+                  <div className="flex gap-2 pt-2">
+                    <Button size="sm">Review Application</Button>
+                    <Button size="sm" variant="outline">Contact Applicant</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </TabsContent>
 
           <TabsContent value="residents" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Current Residents</CardTitle>
-                <CardDescription>Manage active resident profiles and case information</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">No Residents Registered</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Resident management requires backend database integration.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            {mockResidents.map((resident) => (
+              <Card key={resident.id}>
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <CardTitle className="text-xl">{resident.name}</CardTitle>
+                      <CardDescription>
+                        {resident.children} {resident.children === 1 ? 'child' : 'children'} (Ages: {resident.ages})
+                      </CardDescription>
+                    </div>
+                    <Badge variant="default">Active</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <p className="font-medium mb-1">Move-in Date</p>
+                      <p className="text-muted-foreground">{resident.moveInDate}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium mb-1">Expected Exit</p>
+                      <p className="text-muted-foreground">{resident.expectedExit}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium mb-1">Case Manager</p>
+                      <p className="text-muted-foreground">{resident.caseManager}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 pt-2">
+                    <Button size="sm">View Full Profile</Button>
+                    <Button size="sm" variant="outline">Update Case Notes</Button>
+                    <Button size="sm" variant="outline">Schedule Meeting</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-4">

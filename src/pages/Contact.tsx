@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Heart, ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import logo from "@/assets/logo.png";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -47,13 +48,12 @@ ${formData.message}
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="border-b border-border bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <Heart className="h-8 w-8 text-primary fill-primary" />
-            <span className="text-2xl font-bold text-foreground">Agape Safety Nest</span>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
           </Link>
           <Link to="/">
             <Button variant="ghost" size="sm">
@@ -115,13 +115,13 @@ ${formData.message}
               </CardContent>
             </Card>
 
-            <Card className="border-primary/50" style={{ background: "var(--gradient-hero)" }}>
+            <Card className="border-primary/50 bg-muted/30">
               <CardContent className="pt-6">
                 <h3 className="font-semibold mb-2">Need Immediate Help?</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   If you're in crisis or need urgent assistance, please call our hotline or visit your local emergency services.
                 </p>
-                <Button variant="outline" className="w-full" asChild>
+                <Button className="w-full" asChild>
                   <Link to="/onboarding">
                     Start Onboarding Process
                   </Link>

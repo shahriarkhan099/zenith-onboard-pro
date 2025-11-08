@@ -45,7 +45,7 @@ const Landing = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto">
                 Contact Us
               </Button>
             </Link>
@@ -301,7 +301,7 @@ const Landing = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button size="lg" variant="secondary" className="w-full sm:w-auto">
                 Get in Touch
               </Button>
             </Link>

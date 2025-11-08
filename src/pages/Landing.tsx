@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, Users, Baby, HandHeart, Shield, Heart } from "lucide-react";
+import { Home, Users, Baby, HandHeart, Shield, Heart, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
@@ -97,34 +97,76 @@ const Landing = () => {
                 <p className="text-muted-foreground text-center">
                   Comprehensive services addressing physical, emotional, spiritual, and practical needs.
                 </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+               </CardContent>
+             </Card>
+           </div>
+         </div>
+       </section>
 
-      {/* Founder Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Our Founder</h2>
+       {/* Founder Section */}
+       <section className="py-20 px-4 relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto max-w-5xl relative z-10">
+          <div className="text-center mb-12 animate-fade-in">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
+              <Heart className="h-4 w-4" />
+              <span className="text-sm font-medium">Meet Our Founder</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Led by Compassion & <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Purpose</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              A visionary leader dedicated to transforming lives through faith, compassion, and unwavering support
+            </p>
           </div>
-          <Card className="border-2 border-primary/20">
-            <CardContent className="pt-8">
+          
+          <Card className="border-2 border-primary/20 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm bg-white/95">
+            <CardContent className="p-8 md:p-12">
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="rounded-full bg-primary/10 w-32 h-32 flex items-center justify-center flex-shrink-0">
-                  <Users className="h-16 w-16 text-primary" />
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-accent to-primary opacity-75 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                  <div className="relative rounded-full bg-gradient-to-br from-primary/20 to-accent/20 w-40 h-40 flex items-center justify-center border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <Users className="h-20 w-20 text-primary" />
+                  </div>
                 </div>
-                <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Robin Belinda Mitchell</h3>
-                  <p className="text-primary font-semibold mb-4">Founder & Director</p>
-                  <p className="text-muted-foreground mb-4">
-                    Agape Safety Nest LLC was founded by Robin Belinda Mitchell, a compassionate leader with a vision to create a safe and supportive housing environment for vulnerable women. Ms. Mitchell brings deep empathy and a strong sense of mission to helping women in need, particularly expectant mothers and those who have experienced the trauma of losing a child, rebuild their lives through stability, care, and respect.
+                
+                <div className="flex-1 text-center md:text-left space-y-4">
+                  <div>
+                    <h3 className="text-3xl font-bold text-foreground mb-2">Robin Belinda Mitchell</h3>
+                    <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full">
+                      <Heart className="h-3 w-3" />
+                      <span className="font-semibold text-sm">Founder & Director</span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-muted-foreground leading-relaxed text-base">
+                    Agape Safety Nest LLC was founded by <strong className="text-foreground">Robin Belinda Mitchell</strong>, a compassionate leader with a vision to create a safe and supportive housing environment for vulnerable women. Ms. Mitchell brings deep empathy and a strong sense of mission to helping women in need, particularly expectant mothers and those who have experienced the trauma of losing a child, rebuild their lives through stability, care, and respect.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-2 text-sm text-muted-foreground justify-center md:justify-start">
-                    <span>📞 (910) 527-3673</span>
-                    <span className="hidden sm:inline">•</span>
-                    <span>📍 San Antonio, TX 78223</span>
+                  
+                  <div className="pt-4 border-t border-border">
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                      <div className="flex items-center gap-2 text-sm">
+                        <div className="rounded-full bg-primary/10 p-2">
+                          <Phone className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-muted-foreground">(910) 527-3673</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm">
+                        <div className="rounded-full bg-primary/10 p-2">
+                          <HandHeart className="h-4 w-4 text-primary" />
+                        </div>
+                        <span className="text-muted-foreground">San Antonio, TX 78223</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <blockquote className="italic text-foreground/80 border-l-4 border-primary pl-4 py-2">
+                      "Every woman deserves a safe place to heal, grow, and rebuild her future with dignity and support."
+                    </blockquote>
                   </div>
                 </div>
               </div>

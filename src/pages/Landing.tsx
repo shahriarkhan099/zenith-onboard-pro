@@ -31,12 +31,11 @@ const Landing = () => {
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Logo on Left Side with Scripture */}
             <div className="flex-shrink-0 animate-fade-in text-center">
-              <div className="mb-6 space-y-2">
-                <p className="text-sm font-semibold text-primary tracking-wider">SCRIPTURE:</p>
-                <p className="text-base font-medium text-primary italic">Psalms 127:3 NLT</p>
-                <p className="text-sm text-muted-foreground max-w-xs mx-auto leading-relaxed">
+              <div className="mb-8 space-y-3 max-w-md">
+                <p className="text-lg md:text-xl font-serif italic text-foreground/80 leading-relaxed">
                   "Children are a gift from the Lord; they are a reward from him."
                 </p>
+                <p className="text-sm text-muted-foreground font-medium">— Psalms 127:3 NLT</p>
               </div>
               <img src={logo} alt="Agape Safety Nest Logo" className="h-64 md:h-80 lg:h-96 w-auto" />
             </div>

@@ -124,7 +124,7 @@ ${formData.message}
                 </p>
                 <Link to="/onboarding" className="w-full">
                   <Button className="w-full">
-                    Start Onboarding Process
+                    Connect With Us Today
                   </Button>
                 </Link>
               </CardContent>

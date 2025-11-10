@@ -78,15 +78,15 @@ How They Heard About Us: ${formData.referralSource}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">Begin Your Journey</h1>
           <p className="text-lg text-muted-foreground">
-            Complete this form to start the onboarding process. We'll review your information and contact you within 24-48 hours.
+            Share your information with us so we can connect with you and provide the support you need. We'll reach out within 24-48 hours to welcome you.
           </p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Onboarding Application</CardTitle>
+            <CardTitle>Welcome to Agape Safety Nest</CardTitle>
             <CardDescription>
-              All information is confidential and will be used only to assess how we can best serve you.
+              All information is confidential and helps us understand how we can best support you on your journey.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -196,13 +196,12 @@ How They Heard About Us: ${formData.referralSource}
 
               <div className="bg-muted p-4 rounded-lg">
                 <p className="text-sm text-muted-foreground">
-                  <strong>Next Steps:</strong> After submitting this form, our team will review your information. 
-                  We'll contact you within 24-48 hours to discuss your situation, answer questions, and guide you through the next steps.
+                  <strong>Next Steps:</strong> After you submit this form, we'll reach out within 24-48 hours to welcome you, answer any questions, and help you take the next steps toward a safe and supportive home.
                 </p>
               </div>
 
               <Button type="submit" className="w-full" size="lg">
-                Submit Application
+                Connect With Us
               </Button>
             </form>
           </CardContent>

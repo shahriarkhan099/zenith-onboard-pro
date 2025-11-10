@@ -11,7 +11,7 @@ const Landing = () => {
       <nav className="border-b border-border bg-white sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="Agape Safety Nest Logo" className="h-12 w-auto" />
+            <img src={logo} alt="Agape Safety Nest Logo" className="h-16 w-auto" />
             <span className="text-xl font-semibold text-primary">Agape Safety Nest LLC</span>
           </div>
           <div className="hidden md:flex items-center gap-6">
@@ -36,7 +36,7 @@ const Landing = () => {
             A Safe Haven for <span style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Women in Need</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Providing safe, supportive housing for expectant mothers, women who have lost children, women re-entering society after incarceration, and women experiencing homelessness - empowering them to rebuild their lives with dignity and support.
+            Welcoming expectant mothers, women who have lost children, women re-entering society after incarceration, and women experiencing homelessness with open arms - empowering them to rebuild their lives with dignity, love, and support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/onboarding">
@@ -181,7 +181,7 @@ const Landing = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-foreground mb-4">Who We Serve</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Agape Safety Nest welcomes women ages 18 and older who have a guaranteed income source and are seeking stable housing and supportive care.
+              Agape Safety Nest warmly welcomes women ages 18 and older who have a guaranteed income source and are seeking a loving home with stable housing and supportive care.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -315,7 +315,7 @@ const Landing = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <img src={logo} alt="Agape Safety Nest" className="h-10 w-auto" />
+                <img src={logo} alt="Agape Safety Nest" className="h-14 w-auto" />
               </div>
               <p className="text-sm text-muted-foreground">
                 Providing safe, compassionate housing and support for mothers and children.
@@ -326,7 +326,8 @@ const Landing = () => {
               <h3 className="font-semibold mb-4">Contact</h3>
               <p className="text-sm text-muted-foreground mb-2">San Antonio, TX 78223</p>
               <p className="text-sm text-muted-foreground mb-2">Phone: (910) 527-3673</p>
-              <p className="text-sm text-muted-foreground">Email: info@agapesafetynest.org</p>
+              <p className="text-sm text-muted-foreground mb-2">Email: RBM@AGAPESAFETYNEST.ORG</p>
+              <p className="text-sm text-muted-foreground">P/W: ALLGODSCHILDREN</p>
             </div>
             
             <div>

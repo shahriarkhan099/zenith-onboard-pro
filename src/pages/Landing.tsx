@@ -31,7 +31,7 @@ const Landing = () => {
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Logo on Left Side */}
             <div className="flex-shrink-0 animate-fade-in">
-              <img src={logo} alt="Agape Safety Nest Logo" className="h-64 md:h-80 lg:h-96 w-auto" />
+              <img src={logo} alt="Agape Safety Nest Logo" className="h-80 md:h-96 lg:h-[28rem] w-auto" />
             </div>
             
             {/* Content on Right Side */}

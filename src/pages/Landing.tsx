@@ -28,6 +28,9 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="py-20 px-4 bg-white">
         <div className="container mx-auto text-center max-w-4xl">
+          <div className="mb-8 animate-fade-in">
+            <img src={logo} alt="Agape Safety Nest Logo" className="h-32 md:h-40 w-auto mx-auto mb-6" />
+          </div>
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
             <Shield className="h-4 w-4" />
             <span className="text-sm font-medium">Faith-Based Transitional Housing</span>

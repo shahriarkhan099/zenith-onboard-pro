@@ -1271,7 +1271,7 @@ const Admin = () => {
                   <SelectItem value="all">All Residents</SelectItem>
                   <SelectItem value="Active">Active</SelectItem>
                   <SelectItem value="Inactive">Inactive</SelectItem>
-                  <SelectItem value="Move out">Move out</SelectItem>
+                  <SelectItem value="Moved Out">Moved Out</SelectItem>
                 </SelectContent>
               </Select>
               <div className="flex-1 max-w-md">

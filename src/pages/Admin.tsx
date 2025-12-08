@@ -337,11 +337,14 @@ const Admin = () => {
       // If status is "Approved", automatically create an active resident
       if (status === "Approved" && requestData) {
         // Check if resident already exists for this person
-        const { data: existingResident } = await supabase
+        const { data: existingResident, error: checkError } = await supabase
           .from('residents')
           .select('id')
           .eq('name', requestData.full_name)
           .limit(1);
+
+        // If the check query failed, throw error instead of proceeding
+        if (checkError) throw checkError;
 
         // Only create if resident doesn't exist
         if (!existingResident || existingResident.length === 0) {
@@ -568,11 +571,14 @@ const Admin = () => {
   const updateOnboardingMutation = useMutation({
     mutationFn: async (data: any) => {
       // Get the current request to check if status is changing to Approved
-      const { data: currentRequest } = await supabase
+      const { data: currentRequest, error: fetchError } = await supabase
         .from('onboarding_requests')
         .select('status')
         .eq('id', data.id)
         .single();
+
+      // If the fetch query failed, throw error instead of proceeding
+      if (fetchError) throw fetchError;
 
       const wasApproved = currentRequest?.status === "Approved";
       const isBeingApproved = data.status === "Approved" && !wasApproved;
@@ -599,11 +605,14 @@ const Admin = () => {
       // If status is being changed to "Approved", create a resident (if one doesn't already exist)
       if (isBeingApproved) {
         // Check if resident already exists for this person
-        const { data: existingResident } = await supabase
+        const { data: existingResident, error: checkError } = await supabase
           .from('residents')
           .select('id')
           .eq('name', data.full_name)
           .limit(1);
+
+        // If the check query failed, throw error instead of proceeding
+        if (checkError) throw checkError;
 
         // Only create if resident doesn't exist
         if (!existingResident || existingResident.length === 0) {

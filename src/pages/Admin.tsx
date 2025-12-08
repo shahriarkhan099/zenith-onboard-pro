@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Users, FileText, Settings, AlertCircle, Phone, Mail, Calendar, Baby, Plus, Filter, Edit, Trash2, X, Search, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Users, FileText, Settings, AlertCircle, Phone, Mail, Calendar, Plus, Filter, Edit, Trash2, X, Search, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -43,8 +43,6 @@ const Admin = () => {
     name: "",
     email: "",
     phone: "",
-    children: "",
-    ages: "",
     moveInDate: "",
     expectedExit: "",
     caseManager: "Robin Mitchell"
@@ -239,12 +237,6 @@ const Admin = () => {
           name: residentData.name,
           email: residentData.email || null,
           phone: residentData.phone || null,
-          children_count: residentData.children && residentData.children.trim() !== '' 
-            ? parseInt(residentData.children) 
-            : 0,
-          children_ages: residentData.ages && residentData.ages.trim() !== '' 
-            ? residentData.ages 
-            : null,
           move_in_date: residentData.moveInDate,
           expected_exit_date: residentData.expectedExit || null,
           case_manager: residentData.caseManager,
@@ -264,11 +256,11 @@ const Admin = () => {
         name: "",
         email: "",
         phone: "",
-        children: "",
-        ages: "",
-        moveInDate: "",
-        expectedExit: "",
-        caseManager: "Robin Mitchell"
+    children: "",
+    ages: "",
+    moveInDate: "",
+    expectedExit: "",
+    caseManager: "Robin Mitchell"
       });
       toast({
         title: "Resident Added",
@@ -359,8 +351,6 @@ const Admin = () => {
               name: requestData.full_name,
               email: requestData.email || null,
               phone: requestData.phone || null,
-              children_count: requestData.children_count || 0,
-              children_ages: null, // Not available from onboarding form
               move_in_date: moveInDate,
               expected_exit_date: expectedExitDateStr,
               case_manager: "Robin Mitchell", // Default case manager
@@ -590,7 +580,6 @@ const Admin = () => {
           full_name: data.full_name,
           email: data.email,
           phone: data.phone,
-          children_count: data.children_count ? parseInt(data.children_count) : null,
           pregnancy_status: data.pregnancy_status || null,
           current_situation: data.current_situation,
           needs_description: data.needs_description,
@@ -627,8 +616,6 @@ const Admin = () => {
               name: data.full_name,
               email: data.email || null,
               phone: data.phone || null,
-              children_count: data.children_count ? parseInt(data.children_count) : 0,
-              children_ages: null, // Not available from onboarding form
               move_in_date: moveInDate,
               expected_exit_date: expectedExitDateStr,
               case_manager: "Robin Mitchell", // Default case manager
@@ -707,8 +694,6 @@ const Admin = () => {
           name: data.name,
           email: data.email || null,
           phone: data.phone || null,
-          children_count: parseInt(data.children_count),
-          children_ages: data.children_ages || null,
           move_in_date: data.move_in_date,
           expected_exit_date: data.expected_exit_date || null,
           case_manager: data.case_manager,
@@ -821,13 +806,13 @@ const Admin = () => {
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
                   <div className="relative">
-                    <Input
-                      id="password"
+                  <Input
+                    id="password"
                       type={showPassword ? "text" : "password"}
-                      value={loginData.password}
-                      onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                      required
-                      placeholder="••••••••"
+                    value={loginData.password}
+                    onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+                    required
+                    placeholder="••••••••"
                       className="pr-10"
                     />
                     <Button
@@ -890,9 +875,9 @@ const Admin = () => {
 
         {requestsLoading || residentsLoading || contactLoading ? (
           <Alert className="mb-6">
-            <AlertCircle className="h-4 w-4" />
+          <AlertCircle className="h-4 w-4" />
             <AlertDescription>Loading data...</AlertDescription>
-          </Alert>
+        </Alert>
         ) : null}
 
         {/* Stats Overview */}
@@ -987,48 +972,44 @@ const Admin = () => {
               </Card>
             ) : (
               filteredRequests.map((request: any) => (
-                <Card key={request.id}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1">
+              <Card key={request.id}>
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1">
                         <CardTitle className="text-xl">{request.full_name}</CardTitle>
-                        <CardDescription className="flex items-center gap-4 flex-wrap">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
+                      <CardDescription className="flex items-center gap-4 flex-wrap">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
                             {new Date(request.created_at).toLocaleDateString()}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Baby className="h-3 w-3" />
-                            {request.children_count || 0} {request.children_count === 1 ? 'child' : 'children'}
-                          </span>
-                        </CardDescription>
-                      </div>
-                      <Badge variant={request.status === "Approved" ? "default" : request.status === "Pending Review" ? "secondary" : "outline"}>
+                        </span>
+                      </CardDescription>
+                    </div>
+                    <Badge variant={request.status === "Approved" ? "default" : request.status === "Pending Review" ? "secondary" : "outline"}>
                         {request.status === "Approved" ? "Approved" : request.status}
-                      </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2 text-sm">
-                          <Mail className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">{request.email}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <Phone className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-muted-foreground">{request.phone}</span>
-                        </div>
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Mail className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">{request.email}</span>
                       </div>
-                      <div className="space-y-1">
-                        <p className="text-sm font-medium">Pregnancy Status:</p>
+                      <div className="flex items-center gap-2 text-sm">
+                        <Phone className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">{request.phone}</span>
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <p className="text-sm font-medium">Pregnancy Status:</p>
                         <p className="text-sm text-muted-foreground">{request.pregnancy_status || "Not specified"}</p>
-                      </div>
                     </div>
-                    <div className="pt-2">
-                      <p className="text-sm font-medium mb-1">Current Situation:</p>
+                  </div>
+                  <div className="pt-2">
+                    <p className="text-sm font-medium mb-1">Current Situation:</p>
                       <p className="text-sm text-muted-foreground">{request.current_situation}</p>
-                    </div>
+                  </div>
                     <div className="pt-2">
                       <p className="text-sm font-medium mb-1">Needs Description:</p>
                       <p className="text-sm text-muted-foreground">{request.needs_description}</p>
@@ -1109,9 +1090,9 @@ const Admin = () => {
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
-                    </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </CardContent>
+              </Card>
               ))
             )}
           </TabsContent>
@@ -1300,7 +1281,6 @@ const Admin = () => {
                     </DialogDescription>
                   </DialogHeader>
                   <div className="space-y-4 pt-4">
-                    <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="resident-name">Full Name *</Label>
                         <Input
@@ -1310,17 +1290,6 @@ const Admin = () => {
                           placeholder="Enter full name"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="resident-children">Number of Children</Label>
-                        <Input
-                          id="resident-children"
-                          type="number"
-                          value={newResident.children}
-                          onChange={(e) => setNewResident({...newResident, children: e.target.value})}
-                          placeholder="0"
-                        />
-                      </div>
-                    </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="resident-email">Email</Label>
@@ -1342,16 +1311,6 @@ const Admin = () => {
                           placeholder="(123) 456-7890"
                         />
                       </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="resident-ages">Children Ages</Label>
-                        <Input
-                          id="resident-ages"
-                          value={newResident.ages}
-                          onChange={(e) => setNewResident({...newResident, ages: e.target.value})}
-                          placeholder="e.g., 5, 3, 1"
-                        />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="resident-movein">Move-in Date *</Label>
@@ -1362,7 +1321,6 @@ const Admin = () => {
                           onChange={(e) => setNewResident({...newResident, moveInDate: e.target.value})}
                         />
                       </div>
-                    </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="resident-exit">Expected Exit Date</Label>
@@ -1415,44 +1373,39 @@ const Admin = () => {
               </Card>
             ) : (
               filteredResidents.map((resident: any) => (
-                <Card key={resident.id}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
+              <Card key={resident.id}>
+                <CardHeader>
+                  <div className="flex items-start justify-between">
                       <div className="space-y-1">
-                        <CardTitle className="text-xl">{resident.name}</CardTitle>
+                      <CardTitle className="text-xl">{resident.name}</CardTitle>
                         <CardDescription className="flex items-center gap-4 flex-wrap">
-                          <span className="flex items-center gap-1">
-                            <Baby className="h-3 w-3" />
-                            {resident.children_count || 0} {resident.children_count === 1 ? 'child' : 'children'}
-                            {resident.children_ages && ` (Ages: ${resident.children_ages})`}
-                          </span>
                           <span className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             Move-in: {resident.move_in_date ? new Date(resident.move_in_date).toLocaleDateString() : "Not set"}
                           </span>
-                        </CardDescription>
-                      </div>
+                      </CardDescription>
+                    </div>
                       <Badge variant={resident.status === "Active" ? "default" : "secondary"}>
                         {resident.status}
                       </Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-3">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2 text-sm">
                           <Mail className="h-4 w-4 text-muted-foreground" />
                           <span className="text-muted-foreground">{resident.email || "Not provided"}</span>
-                        </div>
+                    </div>
                         <div className="flex items-center gap-2 text-sm">
                           <Phone className="h-4 w-4 text-muted-foreground" />
                           <span className="text-muted-foreground">{resident.phone || "Not provided"}</span>
-                        </div>
-                      </div>
+                    </div>
+                    </div>
                       <div className="space-y-1">
                         <p className="text-sm font-medium">Case Manager:</p>
                         <p className="text-sm text-muted-foreground">{resident.case_manager || "Not assigned"}</p>
-                      </div>
+                  </div>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4 pt-2">
                       <div className="space-y-1">
@@ -1515,9 +1468,9 @@ const Admin = () => {
                           </AlertDialogFooter>
                         </AlertDialogContent>
                       </AlertDialog>
-                    </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </CardContent>
+              </Card>
               ))
             )}
           </TabsContent>
@@ -1572,7 +1525,7 @@ const Admin = () => {
                     >
                       {saveSettingsMutation.isPending ? "Saving..." : "Save Settings"}
                     </Button>
-                  </div>
+                </div>
                 </form>
               </CardContent>
             </Card>
@@ -1597,7 +1550,6 @@ const Admin = () => {
                   full_name: formData.get('full_name') as string,
                   email: formData.get('email') as string,
                   phone: formData.get('phone') as string,
-                  children_count: formData.get('children_count') as string,
                   pregnancy_status: formData.get('pregnancy_status') as string,
                   current_situation: formData.get('current_situation') as string,
                   needs_description: formData.get('needs_description') as string,
@@ -1621,10 +1573,6 @@ const Admin = () => {
                 <div className="space-y-2">
                   <Label htmlFor="edit-phone">Phone *</Label>
                   <Input id="edit-phone" name="phone" defaultValue={editingRequest.phone} required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="edit-children_count">Number of Children</Label>
-                  <Input id="edit-children_count" name="children_count" type="number" defaultValue={editingRequest.children_count || ''} />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
@@ -1748,8 +1696,6 @@ const Admin = () => {
                   name: formData.get('name') as string,
                   email: formData.get('email') as string,
                   phone: formData.get('phone') as string,
-                  children_count: formData.get('children_count') as string,
-                  children_ages: formData.get('children_ages') as string,
                   move_in_date: formData.get('move_in_date') as string,
                   expected_exit_date: formData.get('expected_exit_date') as string,
                   case_manager: formData.get('case_manager') as string,
@@ -1763,10 +1709,6 @@ const Admin = () => {
                   <Label htmlFor="edit-resident-name">Full Name *</Label>
                   <Input id="edit-resident-name" name="name" defaultValue={editingResident.name} required />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="edit-resident-children">Number of Children *</Label>
-                  <Input id="edit-resident-children" name="children_count" type="number" defaultValue={editingResident.children_count} required />
-                </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -1778,15 +1720,9 @@ const Admin = () => {
                   <Input id="edit-resident-phone" name="phone" type="tel" defaultValue={editingResident.phone || ''} placeholder="(123) 456-7890" />
                 </div>
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="edit-resident-ages">Children Ages</Label>
-                  <Input id="edit-resident-ages" name="children_ages" defaultValue={editingResident.children_ages || ''} placeholder="e.g., 5, 3, 1" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="edit-resident-movein">Move-in Date *</Label>
-                  <Input id="edit-resident-movein" name="move_in_date" type="date" defaultValue={editingResident.move_in_date} required />
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-resident-movein">Move-in Date *</Label>
+                <Input id="edit-resident-movein" name="move_in_date" type="date" defaultValue={editingResident.move_in_date} required />
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">

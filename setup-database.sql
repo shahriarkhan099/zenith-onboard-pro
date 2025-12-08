@@ -46,9 +46,10 @@ CREATE TABLE contact_submissions (
 ALTER TABLE contact_submissions ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Allow anyone to insert (for form submissions)
+-- Using 'public' role ensures both anonymous and authenticated users can insert
 CREATE POLICY "Allow public insert" ON contact_submissions
   FOR INSERT
-  TO anon, authenticated
+  TO public
   WITH CHECK (true);
 
 -- Policy: Only authenticated users can read
@@ -76,7 +77,6 @@ CREATE TABLE onboarding_requests (
   full_name TEXT NOT NULL,
   email TEXT NOT NULL,
   phone TEXT NOT NULL,
-  children_count INTEGER,
   pregnancy_status TEXT,
   current_situation TEXT NOT NULL,
   needs_description TEXT NOT NULL,
@@ -91,9 +91,10 @@ CREATE TABLE onboarding_requests (
 ALTER TABLE onboarding_requests ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Allow anyone to insert (for form submissions)
+-- Using 'public' role ensures both anonymous and authenticated users can insert
 CREATE POLICY "Allow public insert" ON onboarding_requests
   FOR INSERT
-  TO anon, authenticated
+  TO public
   WITH CHECK (true);
 
 -- Policy: Only authenticated users can read
@@ -121,8 +122,6 @@ CREATE TABLE residents (
   name TEXT NOT NULL,
   email TEXT,
   phone TEXT,
-  children_count INTEGER NOT NULL,
-  children_ages TEXT,
   move_in_date DATE NOT NULL,
   expected_exit_date DATE,
   case_manager TEXT NOT NULL,
@@ -188,4 +187,14 @@ CREATE POLICY "Allow authenticated all" ON settings
 INSERT INTO settings (id, capacity, contact_email) 
 VALUES (1, 12, 'info@agapesafetynest.org')
 ON CONFLICT (id) DO NOTHING;
+
+-- ============================================
+-- STEP 5: Disable RLS for public form tables
+-- ============================================
+
+-- Disable Row Level Security for contact_submissions (allows public access)
+ALTER TABLE contact_submissions DISABLE ROW LEVEL SECURITY;
+
+-- Disable Row Level Security for onboarding_requests (allows public access)
+ALTER TABLE onboarding_requests DISABLE ROW LEVEL SECURITY;
 

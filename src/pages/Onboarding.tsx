@@ -17,7 +17,6 @@ const Onboarding = () => {
     fullName: "",
     email: "",
     phone: "",
-    childrenCount: "",
     pregnancyStatus: "",
     currentSituation: "",
     needsDescription: "",
@@ -36,7 +35,6 @@ const Onboarding = () => {
             full_name: formData.fullName,
             email: formData.email,
             phone: formData.phone,
-            children_count: formData.childrenCount ? parseInt(formData.childrenCount) : null,
             pregnancy_status: formData.pregnancyStatus || null,
             current_situation: formData.currentSituation,
             needs_description: formData.needsDescription,
@@ -59,7 +57,6 @@ const Onboarding = () => {
         fullName: "",
         email: "",
         phone: "",
-        childrenCount: "",
         pregnancyStatus: "",
         currentSituation: "",
         needsDescription: "",
@@ -160,30 +157,15 @@ const Onboarding = () => {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="childrenCount">Number of Children</Label>
-                  <Input
-                    id="childrenCount"
-                    name="childrenCount"
-                    type="number"
-                    min="0"
-                    value={formData.childrenCount}
-                    onChange={handleChange}
-                    placeholder="0"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="pregnancyStatus">Pregnancy Status</Label>
-                  <Input
-                    id="pregnancyStatus"
-                    name="pregnancyStatus"
-                    value={formData.pregnancyStatus}
-                    onChange={handleChange}
-                    placeholder="e.g., 20 weeks pregnant, not pregnant"
-                  />
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="pregnancyStatus">Pregnancy Status</Label>
+                <Input
+                  id="pregnancyStatus"
+                  name="pregnancyStatus"
+                  value={formData.pregnancyStatus}
+                  onChange={handleChange}
+                  placeholder="e.g., 20 weeks pregnant, not pregnant"
+                />
               </div>
 
               <div className="space-y-2">

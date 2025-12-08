@@ -41,8 +41,8 @@ const Contact = () => {
         .select();
 
       if (error) throw error;
-
-      toast({
+    
+    toast({
         title: "Message Sent Successfully",
         description: "We've received your message and will get back to you within 24 hours.",
       });
@@ -61,7 +61,7 @@ const Contact = () => {
         title: "Error",
         description: error.message || "Failed to send your message. Please try again.",
         variant: "destructive",
-      });
+    });
     } finally {
       setIsSubmitting(false);
     }

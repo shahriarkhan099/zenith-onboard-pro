@@ -7,10 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
 import logo from "@/assets/logo.png";
 
 const Onboarding = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -22,30 +24,57 @@ const Onboarding = () => {
     referralSource: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Create email body
-    const emailBody = `
-New Onboarding Request - Agape Safety Nest
+    setIsSubmitting(true);
 
-Full Name: ${formData.fullName}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Number of Children: ${formData.childrenCount}
-Pregnancy Status: ${formData.pregnancyStatus}
-Current Situation: ${formData.currentSituation}
-Needs Description: ${formData.needsDescription}
-How They Heard About Us: ${formData.referralSource}
-    `.trim();
+    try {
+      const { data, error } = await supabase
+        .from('onboarding_requests')
+        .insert([
+          {
+            full_name: formData.fullName,
+            email: formData.email,
+            phone: formData.phone,
+            children_count: formData.childrenCount ? parseInt(formData.childrenCount) : null,
+            pregnancy_status: formData.pregnancyStatus || null,
+            current_situation: formData.currentSituation,
+            needs_description: formData.needsDescription,
+            referral_source: formData.referralSource || null,
+            status: 'Pending Review',
+            created_at: new Date().toISOString(),
+          },
+        ])
+        .select();
 
-    // Open email client
-    window.location.href = `mailto:info@agapesafetynest.org?subject=Onboarding Request - ${formData.fullName}&body=${encodeURIComponent(emailBody)}`;
-    
-    toast({
-      title: "Opening Email Client",
-      description: "Please send the email to complete your request.",
-    });
+      if (error) throw error;
+
+      toast({
+        title: "Request Submitted Successfully",
+        description: "We've received your information and will reach out within 24-48 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        childrenCount: "",
+        pregnancyStatus: "",
+        currentSituation: "",
+        needsDescription: "",
+        referralSource: "",
+      });
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit your request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -200,8 +229,8 @@ How They Heard About Us: ${formData.referralSource}
                 </p>
               </div>
 
-              <Button type="submit" className="w-full" size="lg">
-                Connect With Us
+              <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Connect With Us"}
               </Button>
             </form>
           </CardContent>

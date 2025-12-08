@@ -7,10 +7,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/lib/supabase";
 import logo from "@/assets/logo.png";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,25 +21,50 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const emailBody = `
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Subject: ${formData.subject}
+    setIsSubmitting(true);
 
-Message:
-${formData.message}
-    `.trim();
+    try {
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || null,
+            subject: formData.subject,
+            message: formData.message,
+            created_at: new Date().toISOString(),
+          },
+        ])
+        .select();
 
-    window.location.href = `mailto:info@agapesafetynest.org?subject=Contact Form: ${formData.subject}&body=${encodeURIComponent(emailBody)}`;
-    
-    toast({
-      title: "Opening Email Client",
-      description: "Please send the email to complete your message.",
-    });
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent Successfully",
+        description: "We've received your message and will get back to you within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -208,8 +235,8 @@ ${formData.message}
                     />
                   </div>
 
-                  <Button type="submit" className="w-full" size="lg">
-                    Send Message
+                  <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>

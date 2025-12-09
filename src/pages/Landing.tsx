@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Home, Users, Baby, HandHeart, Shield, Heart, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
+import robinImage from "@/assets/robin.jpeg";
 
 const Landing = () => {
   return (
@@ -144,14 +145,14 @@ const Landing = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center">
                 <div className="relative group">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary via-accent to-primary opacity-75 rounded-full blur-xl group-hover:blur-2xl transition-all duration-300"></div>
-                  <div className="relative rounded-full bg-gradient-to-br from-primary/20 to-accent/20 w-40 h-40 flex items-center justify-center border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300">
-                    <Users className="h-20 w-20 text-primary" />
+                  <div className="relative rounded-full bg-gradient-to-br from-primary/20 to-accent/20 w-40 h-40 flex items-center justify-center border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                    <img src={robinImage} alt="Robin Mitchell" className="w-full h-full object-cover rounded-full" />
                   </div>
                 </div>
                 
                 <div className="flex-1 text-center md:text-left space-y-4">
                   <div>
-                    <h3 className="text-3xl font-bold text-foreground mb-2">Robin Belinda Mitchell</h3>
+                    <h3 className="text-3xl font-bold text-foreground mb-2">Robin Mitchell</h3>
                     <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full">
                       <Heart className="h-3 w-3" />
                       <span className="font-semibold text-sm">Founder & Director</span>
@@ -159,7 +160,7 @@ const Landing = () => {
                   </div>
                   
                   <p className="text-muted-foreground leading-relaxed text-base">
-                    Agape Safety Nest LLC was founded by <strong className="text-foreground">Robin Belinda Mitchell</strong>, a compassionate leader with a vision to create a safe and supportive housing environment for vulnerable women. Ms. Mitchell brings deep empathy and a strong sense of mission to helping women in need, particularly expectant mothers and those who have experienced the trauma of losing a child, rebuild their lives through stability, care, and respect.
+                    Agape Safety Nest LLC was founded by <strong className="text-foreground">Robin Mitchell</strong>, a compassionate leader with a vision to create a safe and supportive housing environment for vulnerable women. Ms. Mitchell brings deep empathy and a strong sense of mission to helping women in need, particularly expectant mothers and those who have experienced the trauma of losing a child, rebuild their lives through stability, care, and respect.
                   </p>
                   
                   <div className="pt-4 border-t border-border">
@@ -168,7 +169,7 @@ const Landing = () => {
                         <div className="rounded-full bg-primary/10 p-2">
                           <Phone className="h-4 w-4 text-primary" />
                         </div>
-                        <span className="text-muted-foreground">(910) 527-3673</span>
+                        <span className="text-muted-foreground">210-781-1091</span>
                       </div>
                       <div className="flex items-center gap-2 text-sm">
                         <div className="rounded-full bg-primary/10 p-2">
@@ -341,7 +342,7 @@ const Landing = () => {
             <div>
               <h3 className="font-semibold mb-4">Contact</h3>
               <p className="text-sm text-muted-foreground mb-2">San Antonio, TX 78223</p>
-              <p className="text-sm text-muted-foreground mb-2">Phone: (910) 527-3673</p>
+              <p className="text-sm text-muted-foreground mb-2">Phone: 210-781-1091</p>
               <p className="text-sm text-muted-foreground mb-2">Email: RBM@AGAPESAFETYNEST.ORG</p>
               <p className="text-sm text-muted-foreground">P/W: ALLGODSCHILDREN</p>
             </div>

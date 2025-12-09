@@ -220,7 +220,7 @@ const Onboarding = () => {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Need immediate assistance? Call us at <span className="font-semibold text-foreground">(910) 527-3673</span>
+            Need immediate assistance? Call us at <span className="font-semibold text-foreground">210-781-1091</span>
           </p>
         </div>
       </div>

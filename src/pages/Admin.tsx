@@ -50,16 +50,9 @@ const Admin = () => {
 
   // Check authentication state on mount
   useEffect(() => {
-    const allowedEmail = "rbm@agapesafetynest.org";
-    
     supabase.auth.getSession().then(({ data: { session } }) => {
-      // Only allow the authorized email
-      if (session?.user?.email?.toLowerCase() === allowedEmail) {
+      if (session?.user) {
         setUser(session.user);
-      } else if (session?.user) {
-        // If logged in with wrong email, sign out
-        supabase.auth.signOut();
-        setUser(null);
       } else {
         setUser(null);
       }
@@ -68,13 +61,8 @@ const Admin = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      // Only allow the authorized email
-      if (session?.user?.email?.toLowerCase() === allowedEmail) {
+      if (session?.user) {
         setUser(session.user);
-      } else if (session?.user) {
-        // If logged in with wrong email, sign out
-        supabase.auth.signOut();
-        setUser(null);
       } else {
         setUser(null);
       }
@@ -86,19 +74,7 @@ const Admin = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Normalize email to lowercase for comparison
     const normalizedEmail = loginData.email.toLowerCase().trim();
-    const allowedEmail = "rbm@agapesafetynest.org";
-    
-    // Check if email matches the allowed admin email
-    if (normalizedEmail !== allowedEmail) {
-      toast({
-        title: "Access Denied",
-        description: "Only authorized administrators can access this portal.",
-        variant: "destructive",
-      });
-      return;
-    }
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -107,17 +83,6 @@ const Admin = () => {
       });
 
       if (error) throw error;
-      
-      // Double check the user email matches
-      if (data.user?.email?.toLowerCase() !== allowedEmail) {
-        await supabase.auth.signOut();
-        toast({
-          title: "Access Denied",
-          description: "Only authorized administrators can access this portal.",
-          variant: "destructive",
-        });
-        return;
-      }
       
       setUser(data.user);
       toast({
@@ -256,11 +221,9 @@ const Admin = () => {
         name: "",
         email: "",
         phone: "",
-    children: "",
-    ages: "",
-    moveInDate: "",
-    expectedExit: "",
-    caseManager: "Robin Mitchell"
+        moveInDate: "",
+        expectedExit: "",
+        caseManager: "Robin Mitchell"
       });
       toast({
         title: "Resident Added",
@@ -799,7 +762,7 @@ const Admin = () => {
                     value={loginData.email}
                     onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                     required
-                    placeholder="rbm@agapesafetynest.org"
+                    placeholder="Enter your email"
                   />
                 </div>
 
